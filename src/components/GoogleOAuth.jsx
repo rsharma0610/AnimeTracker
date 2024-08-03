@@ -1,8 +1,10 @@
 import {jwtDecode} from "jwt-decode";
 import { useEffect, useState } from 'react';
-import './App.css';
+import { useNavigate } from "react-router-dom";
 
-function App() {
+
+function GoogleOAuth() {
+  const navigate = useNavigate();
   const [user, setUser] = useState({});
 
   function handleCallbackResponse(response){
@@ -10,6 +12,8 @@ function App() {
     var userObject = jwtDecode(response.credential);
     console.log(userObject);
     setUser(userObject);
+    //send userinfo as a prop or something, or as a query param somehow
+    navigate('/home');
   }
   useEffect(() => {
     /* global google  */
@@ -30,4 +34,4 @@ function App() {
   );
 }
 
-export default App;
+export default GoogleOAuth;
