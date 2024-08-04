@@ -33,6 +33,21 @@ app.post("/login", async(req, res) => {
     }
 })
 
+app.post("/register", async(req, res) => {
+    const {username, email, password} = req.body;
+    try{
+        const response = await db.query("INSERT INTO users(username, email, password) VALUES ($1, $2, $3);",[username, email, password]);
+        console.log(response);
+        res.status(200).send("User successfully registered");
+    }catch(error){
+        if (error.code === '23505' && error.constraint === 'users_email_key') {
+            res.status(400).send("Email already exists");
+        } else {
+            res.status(500).send("Internal server error");
+        }
+    }
+})
+
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
   });
