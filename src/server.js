@@ -33,6 +33,21 @@ app.post("/login", async(req, res) => {
     }
 })
 
+app.post("/login-gmail", async(req, res) => {
+    const {email, name} = req.body;
+    try{
+        const response = await db.query("SELECT * FROM users WHERE email=$1;", [email])
+        if(response.rows.length === 0){
+            //Maybe insert some kind of password to indicate that it is a google account????
+            await db.query("INSERT INTO users(username, email) VALUES ($1, $2);",[name, email])
+        }
+        res.status(200).send("Google OAuth login successful");
+    }catch(error){
+        console.log("Db error", error);
+    }
+
+})
+
 app.post("/register", async(req, res) => {
     const {username, email, password} = req.body;
     try{
