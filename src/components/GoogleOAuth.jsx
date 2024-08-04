@@ -29,6 +29,7 @@ function GoogleOAuth() {
   }, []);
   return (
     <div className="App">
+      <p>or</p>
       <div id="signInDiv"></div>
     </div>
   );

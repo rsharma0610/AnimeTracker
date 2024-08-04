@@ -1,7 +1,8 @@
 import react, {useState} from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import GoogleOAuth from "./GoogleOAuth";
+import "../styles/Login.css";
 
 function Login(){
     const navigate = useNavigate();
@@ -10,6 +11,8 @@ function Login(){
         email: "",
         password: ""
     })
+
+    const[loginError, setLoginError] = useState(false);
 
     function handleCredentialChange(event){
         const {name, value} = event.target;
@@ -36,25 +39,32 @@ function Login(){
             if(response.status === 200){
                 console.log("You can continue into the site");
                 navigate('/home');
-            }else if(response.status === 401){
-                console.log("YOU SHALL NOT PASS");
-            }else if(response.status === 500){
-                console.log("Unknown spooky error")
             }
-            }catch(error){
-                console.log("Error communicating with the express server", error)
+        }catch(error){
+            if(error.response.status === 401){
+                console.log("Invalid email or password", error);
+                setLoginError(true);
+            }else if(error.response.status === 500){
+                console.log("Error communicating with the database", error);
+            }else{
+                console.log("unknown error", error);
             }
+        }
     }
 
     return(
-        <div>
-            <h1>Login</h1>
-            <label for="email">Email:</label>
-            <input type="text" id="email" name="email" value={credentials.email} onChange={handleCredentialChange}></input><br></br>
-            <label for="password">Password:</label>
-            <input type="text" id="password" name="password" value={credentials.password} onChange={handleCredentialChange}></input><br></br>
-            <GoogleOAuth />
-            <button onClick={handleLogin} type="button">Login</button>
+        <div className="page_container">
+            <div className="login_container">
+                <h1>Welcome Back</h1>
+                {loginError && <div className="error_container"><p>We don't recognize that username or password. You can try again or use another login option.</p></div>}
+                <label for="email">Email</label>
+                <input type="text" id="email" name="email" value={credentials.email} onChange={handleCredentialChange} placeholder="name@email.com"></input><br></br>
+                <label for="password">Password</label>
+                <input type="text" id="password" name="password" value={credentials.password} onChange={handleCredentialChange} placeholder="Enter your password"></input><br></br>
+                <button onClick={handleLogin} type="button">Login</button>
+                <GoogleOAuth />
+                <p>New User? <Link to="/register">Sign up</Link></p>
+            </div>
         </div>
     )
 }
