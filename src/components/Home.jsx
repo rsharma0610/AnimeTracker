@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Navbar from "./Navbar"
 import "../styles/Home.css"
 import axios from "axios";
+import MainContent from "./MainContent";
 
 function Home(){
     const { id } = useParams();
@@ -43,18 +44,7 @@ function Home(){
             <h1>HELLO WORLD</h1>
             <button type="button" onClick={handleLogout}>Log out</button><br></br><br></br>
             <Navbar updateStatus={handleStatusChange}/>
-            <div>
-                {animeList.map((anime) => {
-                    const{name, favoritecharacter, rating} = anime;
-                    return(
-                        <div>
-                            <h3>{name}</h3>
-                            <p>{favoritecharacter}</p>
-                            <p>{rating}</p>
-                        </div>
-                    )
-                })}
-            </div>
+            <MainContent animeList={animeList} />
         </div>
     )
 }
