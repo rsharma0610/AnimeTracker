@@ -1,13 +1,13 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Navbar from "./Navbar"
 import "../styles/Home.css"
 import axios from "axios";
 import MainContent from "./MainContent";
+import Header from "./Header";
 
 function Home(){
     const { id } = useParams();
-    const navigate = useNavigate();
 
     const [status, setStatus] = useState("Watching");
     const [animeList, setAnimeList] = useState([]);
@@ -35,14 +35,9 @@ function Home(){
         getAnimeList();
     }, [status])
 
-    function handleLogout(){
-        navigate('/');
-    }
-
     return(
         <div className="main_container">
-            <h1>HELLO WORLD</h1>
-            <button type="button" onClick={handleLogout}>Log out</button><br></br><br></br>
+            <Header />
             <Navbar updateStatus={handleStatusChange}/>
             <MainContent animeList={animeList} />
         </div>
