@@ -1,28 +1,26 @@
 import {jwtDecode} from "jwt-decode";
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 
 function GoogleOAuth() {
   const navigate = useNavigate();
-  const [user, setUser] = useState({});
+  
 
   async function handleCallbackResponse(response){
     var userObject = jwtDecode(response.credential);
     const {email, name} = userObject
     //console.log(email, name);
     try{
-      await axios.post("http://localhost:4000/login-gmail", {
+      const response = await axios.post("http://localhost:4000/login-gmail", {
         email,
         name
       })
+      navigate(`/home/${response.data.id}`);
     }catch(error){
       console.log("Error", error);
     }
-    setUser(userObject);
-    //send userinfo as a prop or something, or as a query param somehow
-    navigate('/home');
   }
   useEffect(() => {
     /* global google  */

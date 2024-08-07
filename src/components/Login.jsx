@@ -31,14 +31,14 @@ function Login(){
                     email,
                     password
                 });
-            console.log("Server response", response);
+            console.log("Server response", response.data.id);
             //Maybe turn into a switch statement
             //Note regarding server sending error:
             //When the server sends the 401 error back, it triggers the catch block, we need to find a way around that
             //Maybe do multiple catches to deal with the different types of errors
             if(response.status === 200){
                 console.log("You can continue into the site");
-                navigate('/home');
+                navigate(`/home/${response.data.id}`);
             }
         }catch(error){
             if(error.response.status === 401){
@@ -57,9 +57,9 @@ function Login(){
             <div className="login_container">
                 <h1>Welcome Back</h1>
                 {loginError && <div className="error_container"><p>We don't recognize that username or password. You can try again or use another login option.</p></div>}
-                <label for="email">Email</label>
+                <label htmlFor="email">Email</label>
                 <input type="text" id="email" name="email" value={credentials.email} onChange={handleCredentialChange} placeholder="name@email.com"></input><br></br>
-                <label for="password">Password</label>
+                <label htmlFor="password">Password</label>
                 <input type="text" id="password" name="password" value={credentials.password} onChange={handleCredentialChange} placeholder="Enter your password"></input><br></br>
                 <button onClick={handleLogin} type="button">Login</button>
                 <GoogleOAuth />

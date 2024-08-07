@@ -47,11 +47,11 @@ function Register(){
             <div className="registration_container">
                 <h1>Register</h1>
                 {registrationError && <div className="error_container"><p>That email is already in use</p></div>}
-                <label for="username">Username</label>
+                <label htmlFor="username">Username</label>
                 <input type="text" id="username" name="username" value={registrationInfo.username} onChange={handleRegistrationInfoChange} placeholder="Create a username"></input><br></br>
-                <label for="email">Email</label>
+                <label htmlFor="email">Email</label>
                 <input type="text" id="email" name="email" value={registrationInfo.email} onChange={handleRegistrationInfoChange} placeholder="name@email.com"></input><br></br>
-                <label for="password">Password</label>
+                <label htmlFor="password">Password</label>
                 <input type="text" id="password" name="password" value={registrationInfo.password} onChange={handleRegistrationInfoChange} placeholder="Create your password"></input><br></br>
                 <button onClick={handleRegister} type="button">Register</button>
                 <p>Already a User? <Link to="/">Login</Link></p>
