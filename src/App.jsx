@@ -3,6 +3,7 @@ import { Routes, Route} from "react-router-dom";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import Register from "./components/Register";
+import Create from "./components/Create";
 
 function App(){
 
@@ -12,7 +13,7 @@ function App(){
                 <Route path="/" element={<Login />} />
                 <Route path="/home/:id" element={<Home />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="/create" element={<h1>Create Page: To be implemented later</h1>} />
+                <Route path="/create/:id" element={<Create />} />
             </Routes>
         </>
         

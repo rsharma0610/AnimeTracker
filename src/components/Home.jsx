@@ -37,7 +37,7 @@ function Home(){
 
     return(
         <div className="main_container">
-            <Header />
+            <Header user_id={id}/>
             <Navbar updateStatus={handleStatusChange}/>
             <MainContent animeList={animeList} />
         </div>

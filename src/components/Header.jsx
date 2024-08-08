@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import "../styles/Header.css"
 
-function Header(){
+function Header(props){
 
     const navigate = useNavigate();
 
@@ -10,7 +10,8 @@ function Header(){
     }
 
     function handleCreateClick(){
-        navigate('/create');
+        //console.log(props.user_id);
+        navigate(`/create/${props.user_id}`);
     }
 
     return(

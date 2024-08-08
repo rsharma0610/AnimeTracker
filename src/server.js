@@ -76,6 +76,16 @@ app.post("/register", async(req, res) => {
     }
 })
 
+app.post("/log-anime", async(req, res) => {
+    const { id, name, favCharacter, rating, status} = req.body;
+    try{
+        db.query("INSERT INTO animes (name, favoritecharacter, rating, status, user_id) VALUES($1, $2, $3, $4, $5)", [name, favCharacter, rating, status, id])
+        res.status(200).send("Anime successfully added to the database");
+    }catch(error){
+        console.log("Database error");
+    }
+})
+
 
 
 app.listen(port, () => {
