@@ -1,0 +1,11 @@
+.header_container{
+    display: flex;
+    border: 1px solid black;
+    width: 100%;
+    align-items: center;
+    gap: 10%;
+}
+
+.header_container button{
+    height: 35%;
+}
