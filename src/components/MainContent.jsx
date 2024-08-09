@@ -6,9 +6,10 @@ function MainContent(props){
     return(
         <div className="mainContent_container">
             {props.animeList.map((anime) => {
-                    const{name, favoritecharacter, rating} = anime;
+                    const {id, user_id, name, favoritecharacter, rating} = anime;
+                    
                     return(
-                        <AnimeItem name={name} favCharacter={favoritecharacter} rating={rating} />
+                        <AnimeItem id={id} key={id} user_id={user_id} name={name} favCharacter={favoritecharacter} rating={rating} updateDeleteToggle={props.updateDeleteToggle} />
                     )
                         
                     

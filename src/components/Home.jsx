@@ -10,6 +10,7 @@ function Home(){
     const { id } = useParams();
 
     const [status, setStatus] = useState("Watching");
+    const [deleteToggle, setDeleteToggle] = useState(false);
     const [animeList, setAnimeList] = useState([]);
 
     function handleStatusChange(newStatus){
@@ -33,13 +34,13 @@ function Home(){
             }
         }
         getAnimeList();
-    }, [status])
+    }, [status, deleteToggle])
 
     return(
         <div className="main_container">
             <Header user_id={id}/>
             <Navbar updateStatus={handleStatusChange}/>
-            <MainContent animeList={animeList} />
+            <MainContent animeList={animeList} updateDeleteToggle={setDeleteToggle}/>
         </div>
     )
 }

@@ -86,6 +86,17 @@ app.post("/log-anime", async(req, res) => {
     }
 })
 
+app.post("/delete-anime", async(req, res) => {
+    const {id, user_id} = req.body;
+    console.log(id, user_id)
+    try{
+        db.query("DELETE FROM animes WHERE id=$1 and user_id=$2;", [id, user_id])
+        res.status(200).send("Anime successfully deleted from the database");
+    }catch(error){
+        console.log("Database error");
+    }
+})
+
 
 
 app.listen(port, () => {
