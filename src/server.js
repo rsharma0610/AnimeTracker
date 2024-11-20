@@ -29,6 +29,11 @@ app.get("/get-anime", async(req, res) => {
     }
 })
 
+app.get("/get-anime-recommendations", async(req, res) => {
+    const{user_id} = req.query
+    console.log(user_id)
+})
+
 app.post("/login", async(req, res) => {
     const {email, password} = req.body;
     try{

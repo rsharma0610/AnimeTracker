@@ -1,4 +1,6 @@
 import axios from "axios";
+import "../styles/AnimeItem.css";
+
 function AnimeItem(props){
 
     async function handleDelete(){
@@ -17,7 +19,7 @@ function AnimeItem(props){
     } 
 
     return(
-        <div>
+        <div className="animeItem_container">
             <h3>{props.name}</h3>
             <p>{props.favCharacter}</p>
             <p>{props.rating}</p>
